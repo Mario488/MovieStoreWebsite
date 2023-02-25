@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+<style>
+    body {
+        background-color: #FFD580;
+    }
+    .contact-us-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 50px 0;
+    }
+
+    .contact-form-container {
+        width: 60%;
+    }
+
+        .contact-form-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+    form label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    form input,
+    form textarea {
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    form button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    .contact-info-container {
+        width: 35%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+        .contact-info-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .contact-info-container ul li {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+                .contact-info-container ul li i {
+                    font-size: 1.5rem;
+                    margin-right: 10px;
+                }
+
+
+</style>
+<h1>@ViewData["Title"]</h1>
+
+<div class="contact-us-container">
+    <div class="contact-form-container">
+        <h2>Get in touch</h2>
+        <form action="Index" method="get">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required oninvalid="this.setCustomValidity('Please fill in this field!')" oninput="setCustomValidity('')">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required oninvalid="this.setCustomValidity('Please fill in this field!')" oninput="setCustomValidity('')">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required oninvalid="this.setCustomValidity('Please fill in this field!')" oninput="setCustomValidity('')"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <div class="contact-info-container" style="border: 3px solid lightblue">
+        <h2>Contact Information</h2>
+        <ul>
+            <li class="fw-bold"><i class="fas fa-map-marker-alt"></i>Address: Vratsa Province, Kozloduy 3320, 13 Hristo Botev Street.</li>
+            <li class="fw-bold"><i class="fas fa-phone"></i>+359 899962467</li>
+            <li class="fw-bold"><i class="fas fa-envelope"></i>movieStoreApp@gmail.com</li>
+        </ul>
+    </div>
+</div>

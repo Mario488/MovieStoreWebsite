@@ -1,0 +1,166 @@
+﻿@model move_store_app.Models.MoviesCart
+@{
+    ViewData["Title"] = "ShopCart";
+}
+<style>
+    /* Style for movie display table */
+    table {
+        margin: 50px auto;
+        border-collapse: collapse;
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-right: 210px;
+    }
+
+    td {
+        padding: 20px;
+        text-align: center;
+        vertical-align: middle;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        width: 130%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        align-self: center;
+    }
+
+    td:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background-color: #eeeee4;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin: 10px 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: dodgerblue;
+    }
+
+    img {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    button {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-top: 50px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        button:hover {
+            background-color: orangered;
+            transform: scale(0.95);
+        }
+
+    p {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+
+        p:hover {
+            color: orangered;
+            transition: 0.7s color;
+            cursor: crosshair;
+        }
+
+    .rating {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: orange;
+    }
+
+    .movie-price {
+        color: green;
+    }
+
+    .purchase-btn {
+        background-color: dodgerblue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .purchase-btn:hover {
+            background-color: royalblue;
+        }
+
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 56px;
+        color: black;
+        text-align: center;
+        transition: all 0.3s ease;
+        margin-top: 50px;
+    }
+
+        h1 span {
+            display: inline-block;
+            transform: rotate(-10deg);
+        }
+
+        h1:hover {
+            color: #ff8c00;
+            transform: scale(1.1);
+        }
+</style>
+
+<h1><span>🛍️</span> Shopping Cart <span>🛒</span></h1>
+<table>
+    <tr style="display:grid; grid-template-columns: auto; grid-template-rows: auto; grid-column-gap:135px;">
+        @foreach (var movie in ViewBag.List)
+        {
+            <td class="movie-cell">
+                <h2 class="movie-title">@movie.Title</h2>
+                <img class="movie-image" width="150" height="auto" src="~/css/images/@movie.Image">
+                <p class="movie-price">$@movie.Price</p>
+                <p class="text-info">Description: @movie.Description</p>
+                @if(movie.Rating < 5){
+                    <p class="rating">Rating: @movie.Rating🥈</p>
+                }
+                else{
+                    <p class="rating">Rating: @movie.Rating🥇</p>
+                }
+                <p class="info">Genre: @movie.Genre</p>
+                <p class="info">Release Date: @movie.RelDate</p>
+
+
+                <form method="get" action="Purchase">
+                    <input type="hidden" value="@movie.Price" name="price"/>
+                    <button class="purchase-btn">Confirm Purchase</button>
+                </form>
+            </td>
+        }
+    </tr>   
+</table>
+<form method="get" action="Movies" style="margin-top: 50px;">
+    <button id="button"style="background-color: orangered; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight:bold;">Cancel Purchase</button>
+</form>
+
+
+

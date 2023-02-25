@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+<style>
+    body {
+        background-color: #FFD580;
+    }
+    .about-us-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 50px 0;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .text-container {
+        width: 60%;
+    }
+
+        .text-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .text-container p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+       
+
+</style>
+<h1>@ViewData["Title"]</h1>
+
+<div class="about-us-container">
+    <div class="image-container">
+        <img src="~/css/images/logomovie1.png" width="520" height="520" alt="Company Logo">
+    </div>
+    <div class="text-container">
+        <h2>Welcome to our online film store</h2>
+        <p>We are passionate about movies and believe that they have the power to inspire, entertain, and educate. That's why we created our online film store, to provide movie lovers with a convenient way to discover and enjoy their favorite films.</p>
+        <p>Our collection includes the latest blockbusters, independent films, documentaries, and more. Whether you're in the mood for an action-packed adventure, a heartwarming romance, or a thought-provoking drama, we've got you covered.</p>
+        <p>Thank you for choosing our online film store for your movie needs. We look forward to helping you discover your next favorite film!</p>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var loggedUserName = HttpContextAccessor.HttpContext.Session.GetString("LoggedUserName");
+}
+<style>
+    body {
+        background-color: #FFD580;
+    }
+    #browse:hover{
+        background-color: orangered;
+        transition: 0.7s background-color;
+    }
+
+    div:hover{
+        border-radius: 30px;
+        transition: 1s border-radius;
+    }
+    
+</style>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-success fw-bold" style="text-align:center; font-size: 1.5rem;">@ViewBag.Message</div>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+    <div class="alert alert-success fw-bold" style="text-align:center; font-size: 1.5rem;">@ViewBag.Success</div>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.successLoggedOut))
+    {
+    <div class="alert alert-success fw-bold" style="text-align:center; font-size: 1.5rem;">@ViewBag.successLoggedOut</div>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.SuccessLogged))
+    {
+    <div class="alert alert-success fw-bold" style="text-align:center; font-size: 1.5rem;">@ViewBag.SuccessLogged</div>
+    }
+<div id="container" class="container-fluid bg-light">
+    <div class="row align-items-center py-5">
+        <div class="col text-center">
+            <h1 class="display-4">Welcome to our Movies Store</h1>
+            <p class="lead">Find your favorite movies and TV shows here.</p>
+
+            @if (string.IsNullOrEmpty(loggedUserName)){
+
+                <a id=browse href="@Url.Action("Login", "Authentication")" class="btn btn-primary btn-lg">Please Login to browse for Movies</a>
+            }
+            else{
+                <a id=browse href="@Url.Action("Movies", "Movies")" class="btn btn-primary btn-lg">Browse Movies</a>
+            }
+
+        </div>
+    </div>
+</div>

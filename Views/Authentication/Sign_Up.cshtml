@@ -1,0 +1,87 @@
+﻿@model move_store_app.Models.Registration_Login
+
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    body {
+        background-color: #FFD580;
+    }
+    .login-container {
+        width: 500px;
+        margin: 0 auto;
+        padding: 50px;
+        font-size: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: paleturquoise;
+    }
+
+    .login-form {
+        margin-top: 20px;
+    }
+
+        .login-form input[type="email"],
+        .login-form input[type="password"],
+        .login-form input[type="name"] {
+            width: 100%;
+            height: 50px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 25px;
+        }
+
+    button {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 10px 30px;
+        margin-top: 50px;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        font-weight: bold;
+    }
+
+        button:hover {
+            background-color: darkred;
+            color: #f7f7f7;
+            transform: translateY(-3px);
+        }
+
+    .field-validation-error {
+        color: red;
+        font-size: 1.2rem;
+    }
+</style>
+<div class="login-container">
+    <h2 style="font-weight:bold; text-align:center;">Sign Up</h2>
+    <form asp-action="Sign_Up" asp-controller="Authentication" class="login-form" method="post">
+        <div>
+            <label style="font-weight:bold; font-size:1.4rem;">Name:</label>
+            <input required oninvalid="this.setCustomValidity('Please fill in this field!')" oninput="setCustomValidity('')" type="name" placeholder="Enter username" asp-for="Name" class="form-control" name="Name" />
+            <span asp-validation-for="Name" class="field-validation-error"></span>
+        </div>
+        <div>
+            <label style="font-weight:bold; font-size:1.4rem;">Email:</label>
+            <input required oninvalid="this.setCustomValidity('Please fill in this field!')" oninput="setCustomValidity('')" type="email" placeholder="Enter your email address" asp-for="Email" class="form-control" name="Email" />
+            <span asp-validation-for="Email" class="field-validation-error"></span>
+        </div>
+        <div>
+            <label style="font-weight:bold; font-size:1.4rem;">Password:</label>
+            <input required oninvalid="this.setCustomValidity('Please fill in this field!')" oninput="setCustomValidity('')" type="password" placeholder="Enter your password" asp-for="Password" class="form-control" name="Password" />
+            <span asp-validation-for="Password" class="field-validation-error"></span>
+        </div>
+        @if (ViewBag.Error != null)
+        {
+            <h4 style="font-weight:bold; color: red;">@ViewBag.Error</h4>
+        }
+        <button type="submit">Create</button>
+    </form>
+</div>
+

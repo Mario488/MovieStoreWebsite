@@ -1,0 +1,115 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var loggedUserName = HttpContextAccessor.HttpContext.Session.GetString("LoggedUserName");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - move_store_app</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/move_store_app.styles.css" asp-append-version="true" />
+    <style>
+        a:hover{
+            transform: scale(1.10);
+            cursor: pointer;
+            background-color: white;
+            border-radius: 10px;
+            transition: 0.2s transform,background-color, border-radius;
+        }
+
+        .floatright1 {
+            margin-right: 20px;
+            margin-left: auto;
+        }
+        .floatright2{
+            margin-right: 150px;
+        }
+
+        .floatright3{
+            position: sticky;
+            left: 1150px;
+        }
+
+        a.nickname:hover{
+            cursor:crosshair;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:#ff726f;">
+            <div class="container-fluid" style="background-color: paleturquoise;">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 1.6rem; font-weight: bold; color: darkred;">🎬Movie Store</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1" style="list-style: none; display: flex; margin: 0;">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(loggedUserName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Movies" asp-action="Movies">Movies</a>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(loggedUserName) && loggedUserName == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Movies" asp-action="Create">Add Movie</a>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(loggedUserName)){
+                            <li class="nav-item floatright3">
+                                <a class="nav-link text-dark fw-bold nickname" style="font-size: 1.2rem;">
+                                    Hello, @loggedUserName!👋
+                                </a>
+                            </li>
+                            <li class="nav-item floatright1">
+                                <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Authentication" asp-action="Logout">LogOut</a>
+                            </li>
+                        }
+                        else{
+                            <li class="nav-item floatright1">
+                                <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Authentication" asp-action="Login">Login</a>
+                            </li>
+                        }
+
+                        <li class="nav-item floatright2">
+                            <a class="nav-link text-dark fw-bold" style="font-size: 1.2rem;" asp-area="" asp-controller="Authentication" asp-action="Sign_Up">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<footer class="border-top footer text-muted">
+        <div class="container">
+            Get Some Movies<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
